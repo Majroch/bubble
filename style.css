@@ -1,0 +1,97 @@
+.bubble {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 75px;
+    height: 75px;
+    background-color: #28aed6;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    cursor: pointer;
+    transition: all .3s;
+
+    -webkit-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 10px 0px rgba(0,0,0,0.75);
+}
+
+.bubble:hover {
+    transform: scale(1.1, 1.1);
+}
+
+.textbox {
+    /* display: none; */
+    background-color: white;
+    color: black;
+    width: 300px;
+    height: 400px;
+    position: fixed;
+    bottom: 10px;
+    right: 20px;
+    border: 2px black solid;
+    border-radius: 20px 20px 0 0;
+}
+
+.hide {
+    display: none;
+}
+.textbox .nav {
+    height: 30px;
+    background-color: #28aed6;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    border-radius: 19px 19px 0 0;
+    border-bottom: 1px black solid;
+}
+.button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 30px;
+    height: 30px;
+    color: black;
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.content {
+    width: 100%;
+    height: calc(400px - 80px);
+    /* background-color: red; */
+    color: black;
+    padding: 10px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+.inputText {
+    width: 100%;
+    height: 40px;
+}
+.msg {
+    width: 80%;
+    padding: 10px 20px;
+    background-color: #28aed6;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    word-wrap: break-word;
+}
+.left {
+    float: left;
+}
+.right {
+    float: right;
+}
+#mainInput {
+    width: 100%;
+    height: 100%;
+    border: none;
+    padding: 10px;
+}

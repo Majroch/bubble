@@ -1,0 +1,23 @@
+{
+  "name": "bubble",
+  "homepage": "https://github.com/Majroch/bubble",
+  "authors": [
+    "Majroch <jakuboch4@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "css",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^4.5.1",
+    "jquery": "^3.5.1",
+    "fontawesome": "^5.14.0"
+  }
+}
