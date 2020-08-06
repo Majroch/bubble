@@ -1,28 +1,41 @@
-let ws = new WebSocket("ws://localhost:8001");
+let ws = new WebSocket("ws://"+window.location.hostname+":8001");
 let error = 0;
 let window_closed = 1;
 let count_unseen_messages = 0;
 const old_title = document.title;
-
-ws.onerror = () => {
-    error = 1;
-};
 document.body.onload = () => {
     let content = document.querySelector(".textbox .content");
 
+    function scrollToBottom() {
+        content.scrollTo({ top: content.scrollHeight, behavior: 'smooth' })
+    }
+
     function insertText(pos, msg) {
         content.innerHTML += "<div class='msg float "+pos+"'>"+msg+"</div>";
-        content.scrollTo({ top: content.scrollHeight, behavior: 'smooth' })
+        scrollToBottom();
     }
     let mainInput = document.querySelector("#mainInput");
 
+
+    ws.onerror = () => {
+        error = 1;
+        insertText("left", "Some error when connecting to server!");
+    };
+    ws.onclose = () => {
+        error = 1;
+        insertText("left", "Closed Connection to server!");
+    };
     mainInput.onkeyup = event => {
         if(event.key == "Enter") {
             if(!mainInput.value == "") {
-                ws.send(mainInput.value);
                 insertText("right", mainInput.value);
-                mainInput.value = "";
             }
+            if(error == 0) {
+                ws.send(mainInput.value);
+            } else {
+                insertText("left", "Cannot send message to server... Sorry about that :(")
+            }
+            mainInput.value = "";
         }
     };
 
@@ -43,18 +56,20 @@ document.body.onload = () => {
     let bubble = document.querySelector(".bubble");
     let textbox = document.querySelector(".textbox");
     bubble.onclick = event => {
-        let badge = document.querySelector(".badge");
-        badge.classList.add("hide");
-        count_unseen_messages = 0;
-        document.title = old_title;
-        if(error == 0)
+        if(error == 0) {
+            let badge = document.querySelector(".badge");
+            badge.classList.add("hide");
+            count_unseen_messages = 0;
+            document.title = old_title;
             ws.send("/bubble");
-        textbox.classList.toggle("hide");
-        bubble.classList.toggle("hide");
-        if(window_closed == 0) {
-            window_closed = 1;
-        } else {
-            window_closed = 0;
+            textbox.classList.toggle("hide");
+            bubble.classList.toggle("hide");
+            if(window_closed == 0) {
+                window_closed = 1;
+            } else {
+                window_closed = 0;
+            }
+            scrollToBottom();
         }
     };
 
